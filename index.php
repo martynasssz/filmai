@@ -1,11 +1,13 @@
 <?php
 require 'database.php';
 
-$sql = 'SELECT * FROM tablo';
+$sql = 'SELECT * FROM Tablo';
 $stmt = connect()->prepare($sql);
 $stmt->execute();
-$data= $stmt->fetchAll(PDO::FETCH_OBJ);
-
+$information= $stmt->fetchAll(PDO::FETCH_OBJ);
+//echo '<pre>';
+//var_dump ($data);
+//echo '</pre>';
 
 ?>
 
@@ -24,13 +26,15 @@ $data= $stmt->fetchAll(PDO::FETCH_OBJ);
                     <th>Salė</th>
                     <th>Amžiaus cenzas</th>
                 </tr>
+                <?php foreach($information as $info): ?>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><?= $info->date; ?></td>
+                    <td><?= $info->time; ?></td>
+                    <td><?= $info->movie_name; ?></td>
+                    <td><?= $info->hall; ?></td>
+                    <td><?= $info->person_age; ?></td>
                 </tr>
+                <?php endforeach; ?>
             </table>
         </div>
 
